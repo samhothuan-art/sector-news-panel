@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "description": "o1 的自我进化资产 - 减少常见错误",
+  "genes": [
+    {
+      "type": "Gene",
+      "id": "gene_tushare_api_retry",
+      "category": "repair",
+      "signals_match": ["tushare", "timeout", "network", "api_error"],
+      "problem": "Tushare API 调用超时或失败",
+      "strategy": [
+        "添加 timeout 参数到 exec 调用",
+        "使用 process poll 模式而非直接等待",
+        "失败后自动重试 1-2 次"
+      ],
+      "example": "exec(command, timeout=30) + process(action=poll, timeout=15000)"
+    },
+    {
+      "type": "Gene", 
+      "id": "gene_model_safety_fallback",
+      "category": "repair",
+      "signals_match": ["high risk", "rejected", "kimi", "safety"],
+      "problem": "Kimi 模型触发安全过滤，请求被拒绝",
+      "strategy": [
+        "立即切换到 MiniMax 模型",
+        "告知用户会话被标记",
+        "建议开启新会话"
+      ],
+      "example": "/model minimax-cn/MiniMax-M2.5"
+    },
+    {
+      "type": "Gene",
+      "id": "gene_stock_format_normalize", 
+      "category": "optimize",
+      "signals_match": ["stock", "symbol", "a-share", "format"],
+      "problem": "A 股代码格式不统一（000977, 000977.SZ, 000977SZ）",
+      "strategy": [
+        "统一转换为 tushare 格式：000977.SZ",
+        "自动识别深/沪：6开头→SH, 0/3开头→SZ",
+        "支持 5 开头 ETF 识别"
+      ],
+      "example": "normalize_symbol('000977') → '000977.SZ'"
+    },
+    {
+      "type": "Gene",
+      "id": "gene_cost_basis_calc",
+      "category": "innovate", 
+      "signals_match": ["持仓", "成本", "盈亏", "止盈", "止损"],
+      "problem": "需要计算持仓盈亏、止损止盈位",
+      "strategy": [
+        "接受 cost_price 参数",
+        "计算浮动盈亏金额和百分比",
+        "输出带 emoji 的可视化结果"
+      ],
+      "example": "a-stock-price 000977 63.46"
+    }
+  ],
+  "capsules": [
+    {
+      "type": "Capsule",
+      "id": "capsule_tushare_timeout_20260224",
+      "trigger": ["tushare timeout", "process poll needed"],
+      "gene": "gene_tushare_api_retry",
+      "fix": "将 tushare 调用改为 exec + process poll 模式",
+      "files_changed": ["a-stock-price.py"],
+      "outcome": "success",
+      "date": "2026-02-24"
+    },
+    {
+      "type": "Capsule",
+      "id": "capsule_etf_fund_daily_20260224", 
+      "trigger": ["ETF no data", "512480", "fund_daily"],
+      "gene": "gene_stock_format_normalize",
+      "fix": "ETF 使用 pro.fund_daily() 而非 pro.daily()",
+      "files_changed": ["a-stock-price.py"],
+      "outcome": "success",
+      "date": "2026-02-24"
+    },
+    {
+      "type": "Gene",
+      "id": "gene_tushare_pro_bar_unified",
+      "category": "optimize",
+      "signals_match": ["tushare", "unified", "pro_bar", "ETF", "stock"],
+      "problem": "股票和ETF需要不同接口(daily vs fund_daily)",
+      "strategy": [
+        "使用 ts.pro_bar() 通用接口统一处理",
+        "asset='E' 表示股票, asset='FD' 表示基金/ETF",
+        "支持复权、多周期、批量查询"
+      ],
+      "example": "ts.pro_bar(ts_code='512480.SH', asset='FD', start_date='20250201')",
+      "date": "2026-02-24"
+    }
+  ]
+}

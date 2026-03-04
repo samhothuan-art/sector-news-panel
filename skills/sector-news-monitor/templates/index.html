@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>十大板块新闻监控</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .header {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .header h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        .header .time {
+            color: #666;
+            font-size: 14px;
+        }
+        .sector-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .sector-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            padding-bottom: 12px;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #667eea;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .sector-count {
+            font-size: 14px;
+            color: #666;
+            font-weight: normal;
+        }
+        .news-item {
+            padding: 14px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .news-item:last-child {
+            border-bottom: none;
+        }
+        .news-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #1a1a1a;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 8px;
+            line-height: 1.5;
+            transition: color 0.2s;
+        }
+        .news-title:hover {
+            color: #667eea;
+        }
+        .news-title.important {
+            color: #d32f2f;
+        }
+        .news-title.important:hover {
+            color: #b71c1c;
+        }
+        .news-title.important::before {
+            content: "🔥 ";
+        }
+        .news-content {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 6px;
+        }
+        .news-meta {
+            font-size: 12px;
+            color: #999;
+        }
+        .news-meta .source {
+            margin-right: 12px;
+        }
+        .empty {
+            color: #999;
+            font-size: 14px;
+            padding: 20px 0;
+            text-align: center;
+        }
+        .refresh-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 24px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 12px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .refresh-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 12px;
+            }
+            .sector-card {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📰 十大板块新闻监控</h1>
+            <div class="time">更新时间: {{ update_time }} | <button class="refresh-btn" onclick="location.reload()">🔄 刷新</button></div>
+        </div>
+        
+        {% for sector_name, news_list in sectors.items() %}
+        <div class="sector-card">
+            <div class="sector-title">
+                {{ sector_name }}
+                <span class="sector-count">{{ news_list|length }} 条</span>
+            </div>
+            
+            {% if news_list %}
+                {% for news in news_list[:3] %}
+                <div class="news-item">
+                    <a href="{{ news.url }}" target="_blank" class="news-title {% if news.is_important %}important{% endif %}">
+                        {{ news.title }}
+                    </a>
+                    <div class="news-content">{{ news.content[:100] }}{% if news.content|length > 100 %}...{% endif %}</div>
+                    <div class="news-meta">
+                        <span class="source">📍 {{ news.source }}</span>
+                        <span>{{ news.time }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="empty">暂无相关新闻</div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

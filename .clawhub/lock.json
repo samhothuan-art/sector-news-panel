@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "skills": {
+    "market-analysis-cn": {
+      "version": "1.0.0",
+      "installedAt": 1771731670095
+    },
+    "stock-price-checker": {
+      "version": "1.0.0",
+      "installedAt": 1771731764814
+    },
+    "capability-evolver": {
+      "version": "1.14.0",
+      "installedAt": 1772246568981
+    },
+    "self-improving-agent": {
+      "version": "1.0.11",
+      "installedAt": 1772246572843
+    },
+    "evolver": {
+      "version": "1.14.0",
+      "installedAt": 1772246869773
+    },
+    "feishu-evolver-wrapper": {
+      "version": "1.7.1",
+      "installedAt": 1772246872592
+    },
+    "playwright": {
+      "version": "1.0.2",
+      "installedAt": 1772247455319
+    },
+    "ghost-browser": {
+      "version": "1.0.4",
+      "installedAt": 1772247873737
+    },
+    "finance-news": {
+      "version": "1.0.1",
+      "installedAt": 1772342115433
+    },
+    "cls-news-scraper": {
+      "version": "1.0.0",
+      "installedAt": 1772342143528
+    },
+    "a-stock-monitor": {
+      "version": "1.1.2",
+      "installedAt": 1772342166186
+    },
+    "tavily-search": {
+      "version": "1.0.0",
+      "installedAt": 1772421620457
+    }
+  }
+}
