@@ -202,23 +202,23 @@
                 <span class="card-badge badge-hot">热门</span>
             </div>
             <ul class="news-list">
-                <li class="news-item">
-                    <a href="#" class="news-link">
+                <li class="news-item clickable" onclick="openModal('ai1')">
+                    <div class="news-link">
                         <span class="news-tag tag-policy">政策</span>
                         <span>人社部：正研究措施发挥人工智能创造新岗位和赋能传统岗位作用</span>
-                    </a>
+                    </div>
                 </li>
-                <li class="news-item">
-                    <a href="#" class="news-link">
+                <li class="news-item clickable" onclick="openModal('ai2')">
+                    <div class="news-link">
                         <span class="news-tag tag-earnings">业绩</span>
                         <span>中兴通讯2025年报：算力业务"狂飙"150%，营收1339亿创新高</span>
-                    </a>
+                    </div>
                 </li>
-                <li class="news-item">
-                    <a href="#" class="news-link">
+                <li class="news-item clickable" onclick="openModal('ai3')">
+                    <div class="news-link">
                         <span class="news-tag tag-news">行业</span>
                         <span>OpenAI最强模型GPT-5.4发布，争夺企业市场</span>
-                    </a>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -478,6 +478,108 @@
     
     <button class="refresh-btn" onclick="location.reload()" title="刷新">🔄</button>
     
+    <!-- 详情弹窗 -->
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalTitle" class="modal-title"></div>
+            <div id="modalTag" class="modal-tag"></div>
+            <div id="modalContent" class="modal-body"></div>
+            <a id="modalLink" href="#" target="_blank" class="modal-link">查看原文 &rarr;</a>
+        </div>
+    </div>
+    
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            animation: fadeIn 0.3s;
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 600px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            animation: slideIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .close {
+            color: #888;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        
+        .close:hover {
+            color: #00d4ff;
+        }
+        
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 10px;
+            padding-right: 30px;
+        }
+        
+        .modal-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .modal-body {
+            color: #ccc;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .modal-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(90deg, #00d4ff, #7b2cbf);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: transform 0.2s;
+        }
+        
+        .modal-link:hover {
+            transform: scale(1.05);
+        }
+        
+        .clickable {
+            cursor: pointer;
+        }
+    </style>
+    
     <script>
         // 更新时间
         function updateTime() {
@@ -493,9 +595,100 @@
             document.getElementById('updateTime').textContent = timeStr;
         }
         updateTime();
-        
-        // 每分钟更新时间
         setInterval(updateTime, 60000);
+        
+        // 新闻详情数据（示例）
+        const newsData = {
+            'ai1': {
+                title: '人社部：正研究措施发挥人工智能创造新岗位和赋能传统岗位作用',
+                tag: '政策',
+                tagClass: 'tag-policy',
+                content: '在民生主题记者会上，人社部部长表示，正在研究相关措施，发挥人工智能在创造新岗位和赋能传统岗位方面的作用。这是政策层面对AI产业支持的明确信号，预计将推动AI算力需求持续增长。',
+                link: 'https://finance.sina.com.cn/jjxw/2026-03-07/doc-inhqcpvt5404402.shtml'
+            },
+            'ai2': {
+                title: '中兴通讯2025年报：算力业务"狂飙"150%，营收1339亿创新高',
+                tag: '业绩',
+                tagClass: 'tag-earnings',
+                content: '中兴通讯发布2025年年报，全年营收达到1339亿元，创历史新高。其中算力业务收入同比增长150%，成为公司增长最快的业务板块。这反映了国内算力基础设施建设的加速推进。',
+                link: 'https://finance.sina.com.cn/chanjing/gsnews/2026-03-07/doc-inhqccfx5557503.shtml'
+            },
+            'ai3': {
+                title: 'OpenAI最强模型GPT-5.4发布，争夺企业市场',
+                tag: '行业',
+                tagClass: 'tag-news',
+                content: 'OpenAI正式发布GPT-5.4模型，被称为公司迄今为止最强大的模型。新版本针对企业市场进行了优化，预计将加速AI在各行各业的应用落地，带动算力需求进一步增长。',
+                link: 'https://finance.sina.com.cn/roll/2026-03-07/doc-inhqccfz2087860.shtml'
+            },
+            'semi1': {
+                title: '佰维存储"闯关"千亿市值，存储芯片龙头强势',
+                tag: '业绩',
+                tagClass: 'tag-earnings',
+                content: '佰维存储股价持续上涨，市值接近千亿关口。作为国内存储芯片龙头，公司受益于AI算力带来的存储需求增长，以及国产替代加速的大趋势。',
+                link: '#'
+            },
+            'semi2': {
+                title: '智算集群建设大潮或至，算力芯片需求爆发',
+                tag: '政策',
+                tagClass: 'tag-policy',
+                content: '根据两会政府工作报告精神，智算集群建设将迎来高潮。中银国际证券研报指出，这将带动算力芯片需求爆发，半导体行业迎来新的增长周期。',
+                link: '#'
+            },
+            'semi3': {
+                title: 'A股行业主题ETF四日吸金超430亿，半导体ETF资金流入明显',
+                tag: '资金',
+                tagClass: 'tag-capital',
+                content: '数据显示，近四个交易日A股行业主题ETF合计吸金超过430亿元，其中半导体ETF资金流入最为明显，显示机构资金对半导体板块的持续看好。',
+                link: 'https://finance.sina.com.cn/roll/2026-03-07/doc-inhqccfz2087265.shtml'
+            },
+            'power1': {
+                title: '公用事业价格改革十年首提！电力板块政策红利',
+                tag: '政策',
+                tagClass: 'tag-policy',
+                content: '2026年政府工作报告明确提出"稳步推进公用事业和公共服务价格改革"，这是十年来首次提及。电力板块作为公用事业的核心，将迎来政策红利期。',
+                link: '#'
+            },
+            'power2': {
+                title: '"双碳"引领转型提速，建设能源强国',
+                tag: '行业',
+                tagClass: 'tag-news',
+                content: '中国银河证券研报指出，"双碳"目标引领下，能源转型将提速，单位GDP碳排放降低3.8%的目标将推动新能源和电网建设投资增加。',
+                link: '#'
+            },
+            'power3': {
+                title: 'Token出海=电力出海，电网电力成AI时代核心资源',
+                tag: '资金',
+                tagClass: 'tag-capital',
+                content: '随着AI发展，Token出海等同于电力出海。中国西部绿电成本优势（0.2-0.3元/度 vs 欧美1-1.5元）将推动电力成为AI时代的核心资源，内蒙华电等标的受益。',
+                link: '#'
+            }
+        };
+        
+        // 打开弹窗
+        function openModal(newsId) {
+            const data = newsData[newsId];
+            if (!data) return;
+            
+            document.getElementById('modalTitle').textContent = data.title;
+            document.getElementById('modalTag').textContent = data.tag;
+            document.getElementById('modalTag').className = 'modal-tag ' + data.tagClass;
+            document.getElementById('modalContent').textContent = data.content;
+            document.getElementById('modalLink').href = data.link;
+            document.getElementById('detailModal').style.display = 'block';
+        }
+        
+        // 关闭弹窗
+        function closeModal() {
+            document.getElementById('detailModal').style.display = 'none';
+        }
+        
+        // 点击外部关闭
+        window.onclick = function(event) {
+            const modal = document.getElementById('detailModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
     </script>
 </body>
 </html>
