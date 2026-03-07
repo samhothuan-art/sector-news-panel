@@ -474,6 +474,52 @@
                 </li>
             </ul>
         </div>
+        
+        <!-- 持仓个股 -->
+        <div class="card" style="border: 2px solid rgba(0, 212, 255, 0.5);">
+            <div class="card-header">
+                <span class="card-title">📊 持仓个股</span>
+                <span class="card-badge" style="background: linear-gradient(90deg, #00d4ff, #7b2cbf); color: #fff;">我的持仓</span>
+            </div>
+            <ul class="news-list">
+                <li class="news-item clickable" onclick="openModal('hold1')">
+                    <div class="news-link">
+                        <span class="news-tag" style="background: rgba(76, 175, 80, 0.3); color: #4caf50;">🟢 正面</span>
+                        <span>半导体ETF | 四日吸金超430亿，资金持续流入</span>
+                    </div>
+                </li>
+                <li class="news-item clickable" onclick="openModal('hold2')">
+                    <div class="news-link">
+                        <span class="news-tag" style="background: rgba(76, 175, 80, 0.3); color: #4caf50;">🟢 正面</span>
+                        <span>工业母机ETF | 十五五重点，国产替代加速</span>
+                    </div>
+                </li>
+                <li class="news-item clickable" onclick="openModal('hold3')">
+                    <div class="news-link">
+                        <span class="news-tag" style="background: rgba(255, 152, 0, 0.3); color: #ff9800;">🟡 中性</span>
+                        <span>茂化实华 | 化工板块，非十大核心板块</span>
+                    </div>
+                </li>
+                <li class="news-item clickable" onclick="openModal('hold4')">
+                    <div class="news-link">
+                        <span class="news-tag" style="background: rgba(244, 67, 54, 0.3); color: #f44336;">🔴 负面</span>
+                        <span>恒生科技ETF | 美股大跌，港股承压</span>
+                    </div>
+                </li>
+                <li class="news-item clickable" onclick="openModal('hold5')">
+                    <div class="news-link">
+                        <span class="news-tag" style="background: rgba(255, 152, 0, 0.3); color: #ff9800;">🟡 中性</span>
+                        <span>佛塑科技 | 塑料板块，偏离主线</span>
+                    </div>
+                </li>
+                <li class="news-item clickable" onclick="openModal('hold6')">
+                    <div class="news-link">
+                        <span class="news-tag" style="background: rgba(76, 175, 80, 0.3); color: #4caf50;">🟢 正面</span>
+                        <span>中韩半导体ETF | 半导体板块资金流入</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
     
     <button class="refresh-btn" onclick="location.reload()" title="刷新">🔄</button>
@@ -808,6 +854,60 @@
                 tagClass: 'tag-capital',
                 content: '随着AI发展，Token出海等同于电力出海。中国西部绿电成本优势（0.2-0.3元/度 vs 欧美1-1.5元）将推动电力成为AI时代的核心资源，内蒙华电等标的受益。',
                 link: '#'
+            },
+            'hold1': {
+                title: '半导体ETF | 四日吸金超430亿，资金持续流入',
+                tag: '持仓',
+                tagClass: '',
+                tagCustom: 'background: rgba(76, 175, 80, 0.3); color: #4caf50;',
+                tagText: '🟢 正面',
+                content: 'A股行业主题ETF近四日吸金超430亿，半导体ETF资金流入最为明显。持仓影响：正面。半导体板块持续获得机构资金青睐，有利于ETF净值上涨。建议：继续持有。',
+                link: 'https://finance.sina.com.cn/roll/2026-03-07/doc-inhqccfz2087265.shtml'
+            },
+            'hold2': {
+                title: '工业母机ETF | 十五五重点，国产替代加速',
+                tag: '持仓',
+                tagClass: '',
+                tagCustom: 'background: rgba(76, 175, 80, 0.3); color: #4caf50;',
+                tagText: '🟢 正面',
+                content: '工业母机被列为十五五规划重点突破领域，基建投资加码带动设备更新需求。持仓影响：正面。政策支持力度大，行业景气度提升。建议：继续持有或逢低加仓。',
+                link: '#'
+            },
+            'hold3': {
+                title: '茂化实华 | 化工板块，非十大核心板块',
+                tag: '持仓',
+                tagClass: '',
+                tagCustom: 'background: rgba(255, 152, 0, 0.3); color: #ff9800;',
+                tagText: '🟡 中性',
+                content: '茂化实华属于化工/塑料板块，不在十大核心板块范围内。持仓影响：中性偏负面。偏离主线投资，周一按抢筹纪律处理（10:30前不红就走）。建议：减仓或清仓。',
+                link: '#'
+            },
+            'hold4': {
+                title: '恒生科技ETF | 美股大跌，港股承压',
+                tag: '持仓',
+                tagClass: '',
+                tagCustom: 'background: rgba(244, 67, 54, 0.3); color: #f44336;',
+                tagText: '🔴 负面',
+                content: '美股本周收跌，标普500创10月以来最大周跌幅。港股科技板块受外围影响较大。持仓影响：负面。外围市场波动加剧，港股科技股承压。建议：减仓观望。',
+                link: 'https://finance.sina.com.cn/stock/usstock/c/2026-03-07/doc-inhqccfv8772902.shtml'
+            },
+            'hold5': {
+                title: '佛塑科技 | 塑料板块，偏离主线',
+                tag: '持仓',
+                tagClass: '',
+                tagCustom: 'background: rgba(255, 152, 0, 0.3); color: #ff9800;',
+                tagText: '🟡 中性',
+                content: '佛塑科技属于塑料板块，非十大核心板块，政策面不明确。持仓影响：中性。偏离主线投资，周一按抢筹纪律处理。建议：10:30前不红就走。',
+                link: '#'
+            },
+            'hold6': {
+                title: '中韩半导体ETF | 半导体板块资金流入',
+                tag: '持仓',
+                tagClass: '',
+                tagCustom: 'background: rgba(76, 175, 80, 0.3); color: #4caf50;',
+                tagText: '🟢 正面',
+                content: '半导体板块持续获得资金流入，行业景气度回升。持仓影响：正面。受益于AI算力需求增长，半导体产业链持续受益。建议：继续持有。',
+                link: '#'
             }
         };
         
@@ -817,8 +917,16 @@
             if (!data) return;
             
             document.getElementById('modalTitle').textContent = data.title;
-            document.getElementById('modalTag').textContent = data.tag;
-            document.getElementById('modalTag').className = 'modal-tag ' + data.tagClass;
+            document.getElementById('modalTag').textContent = data.tagText || data.tag;
+            
+            // 处理自定义标签样式（持仓新闻）
+            if (data.tagCustom) {
+                document.getElementById('modalTag').style.cssText = data.tagCustom;
+            } else {
+                document.getElementById('modalTag').className = 'modal-tag ' + data.tagClass;
+                document.getElementById('modalTag').style.cssText = '';
+            }
+            
             document.getElementById('modalContent').textContent = data.content;
             document.getElementById('modalLink').href = data.link;
             document.getElementById('detailModal').style.display = 'block';
