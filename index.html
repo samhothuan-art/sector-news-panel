@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>十大核心板块新闻面板</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #00d4ff, #7b2cbf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .header .time {
+            font-size: 14px;
+            color: #888;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 212, 255, 0.5);
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.2);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+        }
+        
+        .card-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .badge-hot {
+            background: linear-gradient(90deg, #ff416c, #ff4b2b);
+            color: #fff;
+        }
+        
+        .badge-normal {
+            background: rgba(255, 255, 255, 0.1);
+            color: #888;
+        }
+        
+        .news-list {
+            list-style: none;
+        }
+        
+        .news-item {
+            margin-bottom: 12px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+        
+        .news-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .news-link {
+            text-decoration: none;
+            color: #e0e0e0;
+            font-size: 14px;
+            line-height: 1.5;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        
+        .news-link:hover {
+            color: #00d4ff;
+        }
+        
+        .news-tag {
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        
+        .tag-policy {
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+        }
+        
+        .tag-earnings {
+            background: rgba(123, 44, 191, 0.2);
+            color: #b47ee8;
+        }
+        
+        .tag-capital {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+        }
+        
+        .tag-news {
+            background: rgba(76, 175, 80, 0.2);
+            color: #81c784;
+        }
+        
+        .loading {
+            text-align: center;
+            color: #888;
+            padding: 20px;
+            font-size: 14px;
+        }
+        
+        .refresh-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00d4ff, #7b2cbf);
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 212, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .refresh-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(0, 212, 255, 0.6);
+        }
+        
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .card {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔥 十大核心板块新闻面板</h1>
+        <div class="time">更新时间：<span id="updateTime">2026-03-07 23:10</span></div>
+    </div>
+    
+    <div class="grid">
+        <!-- AI算力 -->
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">🤖 AI算力</span>
+                <div>
+                    <span class="card-badge" style="background: rgba(76, 175, 80, 0.3); color: #4caf50; margin-right: 8px;">🟢 看涨</span>
+                    <span class="card-badge badge-hot">热门</span>
+                </div>
+            </div>
+            <ul class="news-list">
+                <li class="news-item clickable" onclick="openModal('ai1')">
+                    <div class="news-link">
+                        <span class="news-tag tag-policy">政策</span>
+                        <span>人社部：正研究措施发挥人工智能创造新岗位和赋能传统岗位作用</span>
+                    </div>
+                </li>
+                <li class="news-item clickable" onclick="openModal('ai2')">
+                    <div class="news-link">
+                        <span class="news-tag tag-earnings">业绩</span>
+                        <span>中兴通讯2025年报：算力业务"狂飙"150%，营收1339亿创新高</span>
+                    </div>
+                </li>
+                <li class="news-item clickable" onclick="openModal('ai3')">
+                    <div class="news-link">
+                        <span class="news-tag tag-news">行业</span>
+                        <span>OpenAI最强模型GPT-5.4发布，争夺企业市场</span>
+                    </div>
+                </li>
+            </ul>
+            
+            <!-- 推荐个股 -->
+            <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1);">
+                <div style="font-size: 12px; color: #888; margin-bottom: 8px;">📌 推荐个股</div>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <span class="stock-tag">中际旭创</span>
+                    <span class="stock-tag">浪潮信息</span>
+                    <span class="stock-tag">英维克</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 半导体 -->
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">💾 半导体</span>
+                <div>
+                    <span class="card-badge" style="background: rgba(76, 175, 80, 0.3); color: #4caf50; margin-right: 8px;">🟢 看涨</span>
+                    <span class="card-badge badge-hot">热门</span>
+                </div>
+            </div>
+            <ul class="news-list">
+                <li class="news-item clickable" onclick="openModal('semi1')">
+                    <div class="news-link">
+                        <span class="news-tag tag-earnings">业绩</span>
+                        <span>佰维存储"闯关"千亿市值，存储芯片龙头强势</span>
+                    </div>
+                </li>
+                <li class="news-item clickable" onclick="openModal('semi2')">
+                    <div class="news-link">
+                        <span class="news-tag tag-policy">政策</span>
+                        <span>智算集群建设大潮或至，算力芯片需求爆发</span>
+                    </div>
+                </li>
+                <li class="news-item clickable" onclick="openModal('semi3')">
+                    <div class="news-link">
+                        <span class="news-tag tag-capital">资金</span>
+                        <span>A股行业主题ETF四日吸金超430亿，半导体ETF资金流入明显</span>
+                    </div>
+                </li>
+            </ul>
+            
+            <!-- 推荐个股 -->
+            <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1);">
+                <div style="font-size: 12px; color: #888; margin-bottom: 8px;">📌 推荐个股</div>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <span class="stock-tag">北方华创</span>
+                    <span class="stock-tag">兆易创新</span>
+                    <span class="stock-tag">中微公司</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 人形机器人 -->
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">🦾 人形机器人</span>
+                <div>
+                    <span class="card-badge" style="background: rgba(255, 152, 0, 0.3); color: #ff9800; margin-right: 8px;">🟡 中性</span>
+                    <span class="card-badge badge-normal">跟踪</span>
+                </div>
+            </div>
+            <ul class="news-list">
+                <li class="news-item clickable" onclick="openModal('robot1')">
+                    <div class="news-link">
+                        <span class="news-tag tag-policy">政策</span>
+                        <span>十五五规划重点提及，产业化加速推进</span>
+                    </div>
+                </li>
+                <li class="news-item clickable" onclick="openModal('robot2')">
+                    <div class="news-link">
+                        <span class="news-tag tag-news">行业</span>
+                        <span>特斯拉/宇树科技产品迭代催化市场热度</span>
+                    </div>
+                </li>
+                <li class="news-item clickable" onclick="openModal('robot3')">
+                    <div class="news-link">
+                        <span class="news-tag tag-capital">资金</span>
+                        <span>工业母机ETF持续获资金关注</span>
+                    </div>
+                </li>
+            </ul>
+            
+            <!-- 推荐个股 -->
+            <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1);">
+                <div style="font-size: 12px; color: #888; margin-bottom: 8px;">📌 推荐个股</div>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <span class="stock-tag">绿的谐波</span>
+                    <span class="stock-tag">双环传动</span>
+                    <span class="stock-tag">汇川技术</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 有色金属 -->
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">⛏️ 有色金属</span>
+                <div>
+                    <span class="card-badge" style="background: rgba(76, 175, 80, 0.3); color: #4caf50; margin-right: 8px;">🟢 看涨</span>
+                    <span class="card-badge badge-hot">热门</span>
+                </div>
+            </div>
+            <ul class="news-list">
+                <li class="news-item clickable" onclick="openModal('metal1')">
+                    <div class="news-link">
+                        <span class="news-tag tag-news">地缘</span>
+                        <span>中东战事推动避险需求，黄金上涨</span>
+                    </div>
+                </li>
+                <li class="news-item clickable" onclick="openModal('metal2')">
+                    <div class="news-link">
+                        <span class="news-tag tag-earnings">业绩</span>
+                        <span>全球复苏预期升温，工业金属需求回暖</span>
+                    </div>
+                </li>
+                <li class="news-item clickable" onclick="openModal('metal3')">
+                    <div class="news-link">
+                        <span class="news-tag tag-capital">资金</span>
+                        <span>有色金属板块资金持续流入</span>
+                    </div>
+                </li>
+            </ul>
+            
+            <!-- 推荐个股 -->
+            <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1);">
+                <div style="font-size: 12px; color: #888; margin-bottom: 8px;">📌 推荐个股</div>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <span class="stock-tag">江西铜业</span>
+                    <span class="stock-tag">山东黄金</span>
+                    <span class="stock-tag">北方稀土</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 新能源出海 -->
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">🔋 新能源出海</span>
+                <div>
+                    <span class="card-badge" style="background: rgba(76, 175, 80, 0.3); color: #4caf50; margin-right: 8px;">🟢 看涨</span>
+                    <span class="card-badge badge-normal">跟踪</span>
+                </div>
+            </div>
+            <ul class="news-list">
+                <li class="news-item clickable" onclick="openModal('ne1')">
+                    <div class="news-link">
+                        <span class="news-tag tag-policy">政策</span>
+                        <span>两会"双碳"目标：单位GDP碳排放降低3.8%</span>
+                    </div>
+                </li>
+                <li class="news-item clickable" onclick="openModal('ne2')">
+                    <div class="news-link">
+                        <span class="news-tag tag-earnings">业绩</span>
+                        <span>比亚迪2026款海狮06EV搭载全新闪充技术</span>
+                    </div>
+                </li>
+                <li class="news-item clickable" onclick="openModal('ne3')">
+                    <div class="news-link">
+                        <span class="news-tag tag-news">行业</span>
+                        <span>制造业竞争力外溢，海外市场持续扩张</span>
+                    </div>
+                </li>
+            </ul>
+            
+            <!-- 推荐个股 -->
+            <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1);">
+                <div style="font-size: 12px; color: #888; margin-bottom: 8px;">📌 推荐个股</div>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <span class="stock-tag">比亚迪</span>
+                    <span class="stock-tag">宁德时代</span>
+                    <span class="stock-tag">阳光电源</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 消费复苏 -->
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">🛍️ 消费复苏</span>
+                <div>
+                    <span class="card-badge" style="background: rgba(255, 152, 0, 0.3); color: #ff9800; margin-right: 8px;">🟡 中性</span>
+                    <span class="card-badge badge-normal">跟踪</span>
+                </div>
+            </div>
+            <ul class="news-list">
+                <li class="news-item clickable" onclick="openModal('consume1')">
+                    <div class="news-link">
+                        <span class="news-tag tag-earnings">数据</span>
+                        <span>2025年、2026春节国内出游人次与花费均创历史新高</span>
+                    </div>
+                </li>
+                <li class="news-item clickable" onclick="openModal('consume2')">
+                    <div class="news-link">
+                        <span class="news-tag tag-policy">政策</span>
+                        <span>消费贷贴息：经办机构从23家扩容到500多家</span>
+                    </div>
+                </li>
+                <li class="news-item clickable" onclick="openModal('consume3')">
+                    <div class="news-link">
+                        <span class="news-tag tag-news">行业</span>
+                        <span>服务消费迎来黄金十年</span>
+                    </div>
+                </li>
+            </ul>
+            
+            <!-- 推荐个股 -->
+            <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1);">
+                <div style="font-size: 12px; color: #888; margin-bottom: 8px;">📌 推荐个股</div>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <span class="stock-tag">贵州茅台</span>
+                    <span class="stock-tag">中国中免</span>
+                    <span class="stock-tag">宋城演艺</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 大军工 -->
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">🚀 大军工</span>
+                <div>
+                    <span class="card-badge" style="background: rgba(255, 152, 0, 0.3); color: #ff9800; margin-right: 8px;">🟡 中性</span>
+                    <span class="card-badge badge-hot">热门</span>
+                </div>
+            </div>
+            <ul class="news-list">
+                <li class="news-item clickable" onclick="openModal('mil1')">
+                    <div class="news-link">
+                        <span class="news-tag tag-news">地缘</span>
+                        <span>特朗普急召军工巨头：将"精良级"武器产量"翻两番"</span>
+                    </div>
+                </li>
+                <li class="news-item clickable" onclick="openModal('mil2')">
+                    <div class="news-link">
+                        <span class="news-tag tag-policy">政策</span>
+                        <span>商业航天+低空经济政策持续加码</span>
+                    </div>
+                </li>
+                <li class="news-item clickable" onclick="openModal('mil3')">
+                    <div class="news-link">
+                        <span class="news-tag tag-capital">资金</span>
+                        <span>军工板块受益地缘冲突，但高位谨慎</span>
+                    </div>
+                </li>
+            </ul>
+            
+            <!-- 推荐个股 -->
+            <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1);">
+                <div style="font-size: 12px; color: #888; margin-bottom: 8px;">📌 推荐个股</div>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <span class="stock-tag">航天电器</span>
+                    <span class="stock-tag">万丰奥威</span>
+                    <span class="stock-tag">航天彩虹</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 高股息防御 -->
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">🛡️ 高股息防御</span>
+                <div>
+                    <span class="card-badge" style="background: rgba(255, 152, 0, 0.3); color: #ff9800; margin-right: 8px;">🟡 中性</span>
+                    <span class="card-badge badge-normal">底仓</span>
+                </div>
+            </div>
+            <ul class="news-list">
+                <li class="news-item clickable" onclick="openModal('div1')">
+                    <div class="news-link">
+                        <span class="news-tag tag-policy">政策</span>
+                        <span>两会强调"稳健灵活"，高股息资产配置价值凸显</span>
+                    </div>
+                </li>
+                <li class="news-item clickable" onclick="openModal('div2')">
+                    <div class="news-link">
+                        <span class="news-tag tag-earnings">业绩</span>
+                        <span>煤炭、银行板块分红率稳定</span>
+                    </div>
+                </li>
+                <li class="news-item clickable" onclick="openModal('div3')">
+                    <div class="news-link">
+                        <span class="news-tag tag-news">市场</span>
+                        <span>震荡市避险需求提升，高股息获资金青睐</span>
+                    </div>
+                </li>
+            </ul>
+            
+            <!-- 推荐个股 -->
+            <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1);">
+                <div style="font-size: 12px; color: #888; margin-bottom: 8px;">📌 推荐个股</div>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <span class="stock-tag">中国神华</span>
+                    <span class="stock-tag">招商银行</span>
+                    <span class="stock-tag">中国移动</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 工业母机 -->
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">⚙️ 工业母机</span>
+                <div>
+                    <span class="card-badge" style="background: rgba(76, 175, 80, 0.3); color: #4caf50; margin-right: 8px;">🟢 看涨</span>
+                    <span class="card-badge badge-normal">跟踪</span>
+                </div>
+            </div>
+            <ul class="news-list">
+                <li class="news-item clickable" onclick="openModal('machine1')">
+                    <div class="news-link">
+                        <span class="news-tag tag-policy">政策</span>
+                        <span>十五五重点：国产替代加速推进</span>
+                    </div>
+                </li>
+                <li class="news-item clickable" onclick="openModal('machine2')">
+                    <div class="news-link">
+                        <span class="news-tag tag-news">行业</span>
+                        <span>基建投资加码，设备更新需求释放</span>
+                    </div>
+                </li>
+                <li class="news-item clickable" onclick="openModal('machine3')">
+                    <div class="news-link">
+                        <span class="news-tag tag-capital">资金</span>
+                        <span>工业母机ETF资金持续流入</span>
+                    </div>
+                </li>
+            </ul>
+            
+            <!-- 推荐个股 -->
+            <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1);">
+                <div style="font-size: 12px; color: #888; margin-bottom: 8px;">📌 推荐个股</div>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <span class="stock-tag">海天精工</span>
+                    <span class="stock-tag">华中数控</span>
+                    <span class="stock-tag">秦川机床</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 电网电力 -->
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">⚡ 电网电力</span>
+                <div>
+                    <span class="card-badge" style="background: rgba(76, 175, 80, 0.3); color: #4caf50; margin-right: 8px;">🟢 看涨</span>
+                    <span class="card-badge badge-hot">热门</span>
+                </div>
+            </div>
+            <ul class="news-list">
+                <li class="news-item clickable" onclick="openModal('power1')">
+                    <div class="news-link">
+                        <span class="news-tag tag-policy">政策</span>
+                        <span>公用事业价格改革十年首提！电力板块政策红利</span>
+                    </div>
+                </li>
+                <li class="news-item clickable" onclick="openModal('power2')">
+                    <div class="news-link">
+                        <span class="news-tag tag-news">行业</span>
+                        <span>"双碳"引领转型提速，建设能源强国</span>
+                    </div>
+                </li>
+                <li class="news-item clickable" onclick="openModal('power3')">
+                    <div class="news-link">
+                        <span class="news-tag tag-capital">资金</span>
+                        <span>Token出海=电力出海，电网电力成AI时代核心资源</span>
+                    </div>
+                </li>
+            </ul>
+            
+            <!-- 推荐个股 -->
+            <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1);">
+                <div style="font-size: 12px; color: #888; margin-bottom: 8px;">📌 推荐个股</div>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <span class="stock-tag">内蒙华电</span>
+                    <span class="stock-tag">国电南瑞</span>
+                    <span class="stock-tag">长江电力</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 持仓个股 -->
+        <div class="card" style="border: 2px solid rgba(0, 212, 255, 0.5);">
+            <div class="card-header">
+                <span class="card-title">📊 持仓个股</span>
+                <span class="card-badge" style="background: linear-gradient(90deg, #00d4ff, #7b2cbf); color: #fff;">我的持仓</span>
+            </div>
+            <ul class="news-list">
+                <li class="news-item clickable" onclick="openModal('hold1')">
+                    <div class="news-link">
+                        <span class="news-tag" style="background: rgba(76, 175, 80, 0.3); color: #4caf50;">🟢 正面</span>
+                        <span>半导体ETF | 四日吸金超430亿，资金持续流入</span>
+                    </div>
+                </li>
+                <li class="news-item clickable" onclick="openModal('hold2')">
+                    <div class="news-link">
+                        <span class="news-tag" style="background: rgba(76, 175, 80, 0.3); color: #4caf50;">🟢 正面</span>
+                        <span>工业母机ETF | 十五五重点，国产替代加速</span>
+                    </div>
+                </li>
+                <li class="news-item clickable" onclick="openModal('hold3')">
+                    <div class="news-link">
+                        <span class="news-tag" style="background: rgba(255, 152, 0, 0.3); color: #ff9800;">🟡 中性</span>
+                        <span>茂化实华 | 化工板块，非十大核心板块</span>
+                    </div>
+                </li>
+                <li class="news-item clickable" onclick="openModal('hold4')">
+                    <div class="news-link">
+                        <span class="news-tag" style="background: rgba(244, 67, 54, 0.3); color: #f44336;">🔴 负面</span>
+                        <span>恒生科技ETF | 美股大跌，港股承压</span>
+                    </div>
+                </li>
+                <li class="news-item clickable" onclick="openModal('hold5')">
+                    <div class="news-link">
+                        <span class="news-tag" style="background: rgba(255, 152, 0, 0.3); color: #ff9800;">🟡 中性</span>
+                        <span>佛塑科技 | 塑料板块，偏离主线</span>
+                    </div>
+                </li>
+                <li class="news-item clickable" onclick="openModal('hold6')">
+                    <div class="news-link">
+                        <span class="news-tag" style="background: rgba(76, 175, 80, 0.3); color: #4caf50;">🟢 正面</span>
+                        <span>中韩半导体ETF | 半导体板块资金流入</span>
+                    </div>
+                </li>
+            </ul>            
+            <!-- 推荐个股 -->
+            <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1);">
+                <div style="font-size: 12px; color: #888; margin-bottom: 8px;">📌 推荐个股</div>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <span class="stock-tag">北方华创</span>
+                    <span class="stock-tag">兆易创新</span>
+                    <span class="stock-tag">中微公司</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <button class="refresh-btn" onclick="location.reload()" title="刷新">🔄</button>
+    
+    <!-- 详情弹窗 -->
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalTitle" class="modal-title"></div>
+            <div id="modalTag" class="modal-tag"></div>
+            <div id="modalContent" class="modal-body"></div>
+            <a id="modalLink" href="#" target="_blank" class="modal-link">查看原文 &rarr;</a>
+        </div>
+    </div>
+    
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            animation: fadeIn 0.3s;
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 600px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            animation: slideIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .close {
+            color: #888;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        
+        .close:hover {
+            color: #00d4ff;
+        }
+        
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 10px;
+            padding-right: 30px;
+        }
+        
+        .modal-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .modal-body {
+            color: #ccc;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .modal-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(90deg, #00d4ff, #7b2cbf);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: transform 0.2s;
+        }
+        
+        .modal-link:hover {
+            transform: scale(1.05);
+        }
+        
+        .clickable {
+            cursor: pointer;
+        }
+        
+        .stock-tag {
+            padding: 4px 10px;
+            background: rgba(0, 212, 255, 0.15);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 12px;
+            font-size: 12px;
+            color: #00d4ff;
+            white-space: nowrap;
+        }
+        
+        .news-section-title {
+            font-size: 12px;
+            color: #00d4ff;
+            margin: 15px 0 10px 0;
+            padding: 5px 10px;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 4px;
+            display: inline-block;
+        }
+        
+        .news-section-title.yesterday {
+            color: #888;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .yesterday-news {
+            opacity: 0.8;
+        }
+        
+        .date-badge {
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 3px;
+            margin-left: 5px;
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+        }
+        
+        .date-badge.yesterday {
+            background: rgba(136, 136, 136, 0.2);
+            color: #888;
+        }
+        
+        .stock-tag {
+            padding: 4px 10px;
+            background: rgba(0, 212, 255, 0.15);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 12px;
+            font-size: 12px;
+            color: #00d4ff;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .stock-tag:hover {
+            background: rgba(0, 212, 255, 0.3);
+            transform: scale(1.05);
+        }
+    </style>
+    
+    <script>
+        // 更新时间
+        function updateTime() {
+            const now = new Date();
+            const timeStr = now.toLocaleString('zh-CN', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            document.getElementById('updateTime').textContent = timeStr;
+        }
+        updateTime();
+        setInterval(updateTime, 60000);
+        
+        // 新闻详情数据（示例）- 带日期标记
+        // date: 'today' | 'yesterday' - 用于区分今日和昨日新闻
+        const newsData = {
+            'ai1': {
+                title: '人社部：正研究措施发挥人工智能创造新岗位和赋能传统岗位作用',
+                tag: '政策',
+                tagClass: 'tag-policy',
+                content: '在民生主题记者会上，人社部部长表示，正在研究相关措施，发挥人工智能在创造新岗位和赋能传统岗位方面的作用。这是政策层面对AI产业支持的明确信号，预计将推动AI算力需求持续增长。',
+                link: 'https://finance.sina.com.cn/jjxw/2026-03-07/doc-inhqcpvt5404402.shtml',
+                date: 'today'
+            },
+            'ai2': {
+                title: '中兴通讯2025年报：算力业务"狂飙"150%，营收1339亿创新高',
+                tag: '业绩',
+                tagClass: 'tag-earnings',
+                content: '中兴通讯发布2025年年报，全年营收达到1339亿元，创历史新高。其中算力业务收入同比增长150%，成为公司增长最快的业务板块。这反映了国内算力基础设施建设的加速推进。',
+                link: 'https://finance.sina.com.cn/chanjing/gsnews/2026-03-07/doc-inhqccfx5557503.shtml',
+                date: 'today'
+            },
+            'ai3': {
+                title: 'OpenAI最强模型GPT-5.4发布，争夺企业市场',
+                tag: '行业',
+                tagClass: 'tag-news',
+                content: 'OpenAI正式发布GPT-5.4模型，被称为公司迄今为止最强大的模型。新版本针对企业市场进行了优化，预计将加速AI在各行各业的应用落地，带动算力需求进一步增长。',
+                link: 'https://finance.sina.com.cn/roll/2026-03-07/doc-inhqccfz2087860.shtml',
+                date: 'today'
+            },
+            'semi1': {
+                title: '佰维存储"闯关"千亿市值，存储芯片龙头强势',
+                tag: '业绩',
+                tagClass: 'tag-earnings',
+                content: '佰维存储股价持续上涨，市值接近千亿关口。作为国内存储芯片龙头，公司受益于AI算力带来的存储需求增长，以及国产替代加速的大趋势。',
+                link: '#',
+                date: 'today'
+            },
+            'semi2': {
+                title: '智算集群建设大潮或至，算力芯片需求爆发',
+                tag: '政策',
+                tagClass: 'tag-policy',
+                content: '根据两会政府工作报告精神，智算集群建设将迎来高潮。中银国际证券研报指出，这将带动算力芯片需求爆发，半导体行业迎来新的增长周期。',
+                link: '#',
+                date: 'today'
+            },
+            'semi3': {
+                title: 'A股行业主题ETF四日吸金超430亿，半导体ETF资金流入明显',
+                tag: '资金',
+                tagClass: 'tag-capital',
+                content: '数据显示，近四个交易日A股行业主题ETF合计吸金超过430亿元，其中半导体ETF资金流入最为明显，显示机构资金对半导体板块的持续看好。',
+                link: 'https://finance.sina.com.cn/roll/2026-03-07/doc-inhqccfz2087265.shtml',
+                date: 'today'
+            },
+            'robot1': {
+                title: '十五五规划重点提及，产业化加速推进',
+                tag: '政策',
+                tagClass: 'tag-policy',
+                content: '人形机器人产业被纳入十五五规划重点发展方向。政策支持下，产业化进程将加速推进，核心零部件和整机厂商迎来发展机遇。',
+                link: '#',
+                date: 'today'
+            },
+            'robot2': {
+                title: '特斯拉/宇树科技产品迭代催化市场热度',
+                tag: '行业',
+                tagClass: 'tag-news',
+                content: '特斯拉Optimus和宇树科技产品持续迭代，技术突破不断。龙头企业的进展催化市场对人形机器人产业的关注度，产业链上下游公司受益。',
+                link: '#',
+                date: 'today'
+            },
+            'robot3': {
+                title: '工业母机ETF持续获资金关注',
+                tag: '资金',
+                tagClass: 'tag-capital',
+                content: '机器人产业链相关的工业母机ETF持续获得资金流入。投资者看好机器人产业长期发展前景，通过ETF布局产业链核心标的。',
+                link: '#',
+                date: 'today'
+            },
+            'metal1': {
+                title: '中东战事推动避险需求，黄金上涨',
+                tag: '地缘',
+                tagClass: 'tag-news',
+                content: '中东地缘政治紧张局势升级，市场避险情绪升温，黄金价格持续上涨。同时，战事对石油供应的担忧也推高了能源相关金属价格。',
+                link: '#',
+                date: 'today'
+            },
+            'metal2': {
+                title: '全球复苏预期升温，工业金属需求回暖',
+                tag: '业绩',
+                tagClass: 'tag-earnings',
+                content: '随着全球经济复苏预期增强，工业金属需求有望回暖。铜、铝等基本金属价格企稳回升，相关企业盈利能力改善。',
+                link: '#',
+                date: 'today'
+            },
+            'metal3': {
+                title: '有色金属板块资金持续流入',
+                tag: '资金',
+                tagClass: 'tag-capital',
+                content: '近期有色金属板块持续获得资金流入。地缘避险需求叠加全球经济复苏预期，投资者增配有色的意愿增强。',
+                link: '#',
+                date: 'today'
+            },
+            'ne1': {
+                title: '两会"双碳"目标：单位GDP碳排放降低3.8%',
+                tag: '政策',
+                tagClass: 'tag-policy',
+                content: '2026年政府工作报告明确，单位GDP碳排放要降低3.8%。这一目标的提出将推动新能源产业持续发展，光伏、风电、储能等领域迎来政策利好。',
+                link: '#',
+                date: 'today'
+            },
+            'ne2': {
+                title: '比亚迪2026款海狮06EV搭载全新闪充技术',
+                tag: '业绩',
+                tagClass: 'tag-earnings',
+                content: '比亚迪发布2026款海狮06EV，售价15.99万元起，搭载全新闪充技术。充电速度大幅提升，进一步增强了新能源汽车的市场竞争力。',
+                link: 'https://finance.sina.com.cn/tech/shenji/2026-03-07/doc-inhqcpvt5396965.shtml',
+                date: 'today'
+            },
+            'ne3': {
+                title: '制造业竞争力外溢，海外市场持续扩张',
+                tag: '行业',
+                tagClass: 'tag-news',
+                content: '中国新能源制造业竞争力不断增强，海外市场扩张加速。比亚迪、宁德时代等龙头企业海外布局深入，出口业务成为新增长点。',
+                link: '#',
+                date: 'today'
+            },
+            'consume1': {
+                title: '2025年、2026春节国内出游人次与花费均创历史新高',
+                tag: '数据',
+                tagClass: 'tag-earnings',
+                content: '文旅部数据显示，2025年全年及2026年春节假期，国内出游人次和旅游花费均创历史新高。消费复苏势头强劲，服务消费成为亮点。',
+                link: 'https://finance.sina.com.cn/jjxw/2026-03-07/doc-inhqcpvq1924465.shtml',
+                date: 'today'
+            },
+            'consume2': {
+                title: '消费贷贴息：经办机构从23家扩容到500多家',
+                tag: '政策',
+                tagClass: 'tag-policy',
+                content: '财政部表示，消费贷贴息政策经办机构从23家大幅扩容到500多家。政策加码刺激消费，预计将带动汽车、家电等大宗消费增长。',
+                link: '#',
+                date: 'today'
+            },
+            'consume3': {
+                title: '服务消费迎来黄金十年',
+                tag: '行业',
+                tagClass: 'tag-news',
+                content: '华创证券研报指出，服务消费迎来黄金十年。旅游、餐饮、文化娱乐等服务消费需求旺盛，相关板块具备长期投资价值。',
+                link: '#',
+                date: 'today'
+            },
+            'mil1': {
+                title: '特朗普急召军工巨头：将"精良级"武器产量"翻两番"',
+                tag: '地缘',
+                tagClass: 'tag-news',
+                content: '特朗普在白宫紧急召集军工巨头，要求将"精良级"武器产量"翻两番"。中东局势紧张背景下，美国加大对军工产业的投入。',
+                link: '#',
+                date: 'today'
+            },
+            'mil2': {
+                title: '商业航天+低空经济政策持续加码',
+                tag: '政策',
+                tagClass: 'tag-policy',
+                content: '两会期间，商业航天和低空经济获得政策支持。政府工作报告提及相关领域发展，预计将有更多配套政策出台。',
+                link: '#',
+                date: 'today'
+            },
+            'mil3': {
+                title: '军工板块受益地缘冲突，但高位谨慎',
+                tag: '资金',
+                tagClass: 'tag-capital',
+                content: '中东局势推动军工板块短期上涨，但板块整体估值已处于相对高位。投资者需关注业绩兑现情况，避免追高。',
+                link: '#',
+                date: 'today'
+            },
+            'div1': {
+                title: '两会强调"稳健灵活"，高股息资产配置价值凸显',
+                tag: '政策',
+                tagClass: 'tag-policy',
+                content: '2026年政府工作报告强调"稳健灵活"的宏观政策基调。在市场波动加大的背景下，高股息资产配置价值凸显，煤炭、银行等板块受关注。',
+                link: '#',
+                date: 'today'
+            },
+            'div2': {
+                title: '煤炭、银行板块分红率稳定',
+                tag: '业绩',
+                tagClass: 'tag-earnings',
+                content: '煤炭和银行板块延续高分红传统，分红率保持稳定。对于追求稳定收益的投资者，高股息板块具有较好的配置价值。',
+                link: '#',
+                date: 'today'
+            },
+            'div3': {
+                title: '震荡市避险需求提升，高股息获资金青睐',
+                tag: '市场',
+                tagClass: 'tag-news',
+                content: '市场震荡加剧，资金避险需求提升。高股息板块因其稳定的分红收益和相对低估值，获得资金青睐，成为震荡市的避风港。',
+                link: '#',
+                date: 'today'
+            },
+            'machine1': {
+                title: '十五五重点：国产替代加速推进',
+                tag: '政策',
+                tagClass: 'tag-policy',
+                content: '工业母机被列为十五五规划重点突破领域。政策支持下，国产替代进程加速，高端数控机床自给率有望提升。',
+                link: '#',
+                date: 'today'
+            },
+            'machine2': {
+                title: '基建投资加码，设备更新需求释放',
+                tag: '行业',
+                tagClass: 'tag-news',
+                content: '专项债4.4万亿、特别国债1.3万亿的财政安排将推动基建投资加码。存量设备更新需求释放，工业母机行业景气度提升。',
+                link: '#',
+                date: 'today'
+            },
+            'machine3': {
+                title: '工业母机ETF资金持续流入',
+                tag: '资金',
+                tagClass: 'tag-capital',
+                content: '工业母机ETF近期持续获得资金流入。投资者看好国产替代和设备更新双轮驱动下的行业前景，通过ETF布局产业链。',
+                link: '#',
+                date: 'today'
+            },
+            'power1': {
+                title: '公用事业价格改革十年首提！电力板块政策红利',
+                tag: '政策',
+                tagClass: 'tag-policy',
+                content: '2026年政府工作报告明确提出"稳步推进公用事业和公共服务价格改革"，这是十年来首次提及。电力板块作为公用事业的核心，将迎来政策红利期。',
+                link: '#',
+                date: 'today'
+            },
+            'power2': {
+                title: '"双碳"引领转型提速，建设能源强国',
+                tag: '行业',
+                tagClass: 'tag-news',
+                content: '中国银河证券研报指出，"双碳"目标引领下，能源转型将提速，单位GDP碳排放降低3.8%的目标将推动新能源和电网建设投资增加。',
+                link: '#',
+                date: 'today'
+            },
+            'power3': {
+                title: 'Token出海=电力出海，电网电力成AI时代核心资源',
+                tag: '资金',
+                tagClass: 'tag-capital',
+                content: '随着AI发展，Token出海等同于电力出海。中国西部绿电成本优势（0.2-0.3元/度 vs 欧美1-1.5元）将推动电力成为AI时代的核心资源，内蒙华电等标的受益。',
+                link: '#',
+                date: 'today'
+            },
+            'hold1': {
+                title: '半导体ETF | 四日吸金超430亿，资金持续流入',
+                tag: '持仓',
+                tagClass: '',
+                tagCustom: 'background: rgba(76, 175, 80, 0.3); color: #4caf50;',
+                tagText: '🟢 正面',
+                content: 'A股行业主题ETF近四日吸金超430亿，半导体ETF资金流入最为明显。持仓影响：正面。半导体板块持续获得机构资金青睐，有利于ETF净值上涨。建议：继续持有。',
+                link: 'https://finance.sina.com.cn/roll/2026-03-07/doc-inhqccfz2087265.shtml',
+                date: 'today'
+            },
+            'hold2': {
+                title: '工业母机ETF | 十五五重点，国产替代加速',
+                tag: '持仓',
+                tagClass: '',
+                tagCustom: 'background: rgba(76, 175, 80, 0.3); color: #4caf50;',
+                tagText: '🟢 正面',
+                content: '工业母机被列为十五五规划重点突破领域，基建投资加码带动设备更新需求。持仓影响：正面。政策支持力度大，行业景气度提升。建议：继续持有或逢低加仓。',
+                link: '#',
+                date: 'today'
+            },
+            'hold3': {
+                title: '茂化实华 | 化工板块，非十大核心板块',
+                tag: '持仓',
+                tagClass: '',
+                tagCustom: 'background: rgba(255, 152, 0, 0.3); color: #ff9800;',
+                tagText: '🟡 中性',
+                content: '茂化实华属于化工/塑料板块，不在十大核心板块范围内。持仓影响：中性偏负面。偏离主线投资，周一按抢筹纪律处理（10:30前不红就走）。建议：减仓或清仓。',
+                link: '#',
+                date: 'today'
+            },
+            'hold4': {
+                title: '恒生科技ETF | 美股大跌，港股承压',
+                tag: '持仓',
+                tagClass: '',
+                tagCustom: 'background: rgba(244, 67, 54, 0.3); color: #f44336;',
+                tagText: '🔴 负面',
+                content: '美股本周收跌，标普500创10月以来最大周跌幅。港股科技板块受外围影响较大。持仓影响：负面。外围市场波动加剧，港股科技股承压。建议：减仓观望。',
+                link: 'https://finance.sina.com.cn/stock/usstock/c/2026-03-07/doc-inhqccfv8772902.shtml',
+                date: 'today'
+            },
+            'hold5': {
+                title: '佛塑科技 | 塑料板块，偏离主线',
+                tag: '持仓',
+                tagClass: '',
+                tagCustom: 'background: rgba(255, 152, 0, 0.3); color: #ff9800;',
+                tagText: '🟡 中性',
+                content: '佛塑科技属于塑料板块，非十大核心板块，政策面不明确。持仓影响：中性。偏离主线投资，周一按抢筹纪律处理。建议：10:30前不红就走。',
+                link: '#',
+                date: 'today'
+            },
+            'hold6': {
+                title: '中韩半导体ETF | 半导体板块资金流入',
+                tag: '持仓',
+                tagClass: '',
+                tagCustom: 'background: rgba(76, 175, 80, 0.3); color: #4caf50;',
+                tagText: '🟢 正面',
+                content: '半导体板块持续获得资金流入，行业景气度回升。持仓影响：正面。受益于AI算力需求增长，半导体产业链持续受益。建议：继续持有。',
+                link: '#',
+                date: 'today'
+            }
+        };
+        
+        // 更新规则说明（用于每日更新时参考）
+        // 09:00 第一次更新：删除所有 date='yesterday' 的新闻，将 date='today' 改为 'yesterday'
+        // 12:00/15:30/20:00 更新：保留 yesterday 和 today，只更新 today 的内容
+        
+        // 打开弹窗
+        function openModal(newsId) {
+            const data = newsData[newsId];
+            if (!data) return;
+            
+            document.getElementById('modalTitle').textContent = data.title;
+            document.getElementById('modalTag').textContent = data.tagText || data.tag;
+            
+            // 处理自定义标签样式（持仓新闻）
+            if (data.tagCustom) {
+                document.getElementById('modalTag').style.cssText = data.tagCustom;
+            } else {
+                document.getElementById('modalTag').className = 'modal-tag ' + data.tagClass;
+                document.getElementById('modalTag').style.cssText = '';
+            }
+            
+            document.getElementById('modalContent').textContent = data.content;
+            document.getElementById('modalLink').href = data.link;
+            document.getElementById('detailModal').style.display = 'block';
+        }
+        
+        // 关闭弹窗
+        function closeModal() {
+            document.getElementById('detailModal').style.display = 'none';
+        }
+        
+        // 点击外部关闭
+        window.onclick = function(event) {
+            const modal = document.getElementById('detailModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
